@@ -43,6 +43,10 @@ public:
 		std::cout << str << std::endl;
 	}
 	 
+	//Дуструктор 
+	~String() {
+		delete[] str;
+	}
 };
 
 int main() {
