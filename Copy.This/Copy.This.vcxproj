@@ -130,10 +130,13 @@
     <ClCompile Include="Array-d.cpp" />
     <ClCompile Include="Array-main.cpp" />
     <ClCompile Include="Array.cpp" />
+    <ClCompile Include="String-b.cpp" />
+    <ClCompile Include="String-main.cpp" />
     <ClCompile Include="String.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Array.h" />
+    <ClInclude Include="String.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
