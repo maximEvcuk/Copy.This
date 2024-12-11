@@ -1,45 +1,107 @@
-#include "String.h"
+п»ї#include "String.h"
 #include<cstring>
 #include<iostream>
 
-// Конструктор за замовчуванням
+// РљРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ Р·Р° Р·Р°РјРѕРІС‡СѓРІР°РЅРЅСЏРј
 String::String() : size(80) {
     str = new char[size + 1];
-    str[0] = '\0'; // ініціалізація порожнього рядку
+    str[0] = '\0'; // С–РЅС–С†С–Р°Р»С–Р·Р°С†С–СЏ РїРѕСЂРѕР¶РЅСЊРѕРіРѕ СЂСЏРґРєСѓ
 }
 
-// Конструктор з параметром довжини
+// РљРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ Р· РїР°СЂР°РјРµС‚СЂРѕРј РґРѕРІР¶РёРЅРё
 String::String(size_t length) : size(length) {
     str = new char[size + 1];
-    str[0] = '\0'; // ініціалізація порожнього рядку
+    str[0] = '\0'; // С–РЅС–С†С–Р°Р»С–Р·Р°С†С–СЏ РїРѕСЂРѕР¶РЅСЊРѕРіРѕ СЂСЏРґРєСѓ
 }
 
-// Конструктор ініціалізації рядку
+// РљРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ С–РЅС–С†С–Р°Р»С–Р·Р°С†С–С— СЂСЏРґРєСѓ
 String::String(const char* input) {
     size = strlen(input);
     str = new char[size + 1];
     strcpy(str, input);
 }
 
-// Конструктор копій
+// РљРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ РєРѕРїС–Р№
 String::String(const String& other) {
     size = other.size;
     str = new char[size + 1];
     strcpy(str, other.str);
 }
 
-// Метод введення рядка
+// РњРµС‚РѕРґ РІРІРµРґРµРЅРЅСЏ СЂСЏРґРєР°
 void String::input() {
     std::cout << "Print String:" << std::endl;
     std::cin.getline(str, size + 1);
 }
 
-// Метод виведення рядка на екран
+// РњРµС‚РѕРґ РІРёРІРµРґРµРЅРЅСЏ СЂСЏРґРєР° РЅР° РµРєСЂР°РЅ
 void String::output() const {
     std::cout << str << std::endl;
 }
 
-// Деструктор
+// Р”РµСЃС‚СЂСѓРєС‚РѕСЂ
 String::~String() {
     delete[] str;
 }
+
+// РћРїРµСЂР°С‚РѕСЂ =
+String& String::operator=(const String& other) {
+    if (this != &other) {
+        delete[] str;
+        size = other.size;
+        str = new char[size + 1];
+        strcpy(str, other.str);
+    }
+    return *this;
+}
+
+// Р‘С–РЅР°СЂРЅРёР№ РѕРїРµСЂР°С‚РѕСЂ +
+String String::operator+(const String& other) const {
+    String result(size + other.size);
+    strcpy(result.str, str);
+    strcat(result.str, other.str);
+    return result;
+}
+
+// РћРїРµСЂР°С‚РѕСЂ +=
+String& String::operator+=(const String& other) {
+    size_t newSize = size + other.size;
+    char* newStr = new char[newSize + 1];
+    strcpy(newStr, str);
+    strcat(newStr, other.str);
+    delete[] str;
+    str = newStr;
+    size = newSize;
+    return *this;
+}
+
+// РћРїРµСЂР°С‚РѕСЂ []
+char& String::operator[](size_t index) {
+    return str[index];
+}
+
+// РћРїРµСЂР°С‚РѕСЂ <<
+std::ostream& operator<<(std::ostream& os, const String& str) {
+    os << str.str;
+    return os;
+}
+
+// РћРїРµСЂР°С‚РѕСЂ ==
+bool String::operator==(const String& other) const {
+    return strcmp(str, other.str) == 0;
+}
+
+// РћРїРµСЂР°С‚РѕСЂ !=
+bool String::operator!=(const String& other) const {
+    return !(*this == other);
+}
+
+// РћРїРµСЂР°С‚РѕСЂ >
+bool String::operator>(const String& other) const {
+    return size > other.size;
+}
+
+// РћРїРµСЂР°С‚РѕСЂ <
+bool String::operator<(const String& other) const {
+    return size < other.size;
+}вЂЌ
